@@ -13,9 +13,7 @@
   </head>
   <body>
     <?php
-    // Ensure header.php exists in the same directory
     include "./header.php"; 
-    // Commented out to prevent errors if you haven't created it yet
     ?>
 
     <!-- <header class="navbar" id="navbar">
@@ -117,6 +115,7 @@
         </div>
       </div>
     </main>
+    <?php include "./footer.php"; ?>
 
     <script src="../Asset/Js/script.js"></script>
     <script>

@@ -1,15 +1,19 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-  session_start();
+    session_start();
 }
-if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
-  header('location: login.php');
-  exit();
-}
+// if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+//     header('location: login.php');
+//     exit();
+// }
+
+require_once '../model/cows.php';
+$allCows = GetAllCows();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,226 +22,65 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="../Asset/style/style.css" />
 </head>
+
 <body>
 
-    <?php
-    include "./header.php";
-    ?>
+    <?php include "./header.php"; ?>
 
     <main class="market-section">
         <div class="container">
-            
             <div class="market-header">
                 <h1>Browse Livestock</h1>
-                <p>Find the best breeds from verified farmers across the country.</p>
-            </div>
-
-            <div class="filter-bar">
-                <div class="search-wrapper">
-                    <i class="ph ph-magnifying-glass"></i>
-                    <input type="text" placeholder="Search by breed, location, or tag ID...">
-                </div>
-
-                <div class="filter-actions">
-                    <div class="select-wrapper">
-                        <select>
-                            <option value="newest">Newest Listed</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="weight">Weight: High to Low</option>
-                        </select>
-                        <i class="ph ph-caret-down"></i>
-                    </div>
-                    <button class="btn btn-outline filter-btn">
-                        <i class="ph ph-sliders-horizontal"></i> Filters
-                    </button>
-                </div>
+                <p>Find the best breeds from verified farmers.</p>
             </div>
 
             <div class="cow-grid">
-                
-                <article class="cow-card">
-                    <div class="card-image">
-                        <span class="badge-verified"><i class="ph-fill ph-seal-check"></i> Verified</span>
-                        <span class="tag-price">$1,500</span>
-                        <img src="https://images.unsplash.com/photo-1545468800-85cc9bc6ecf7?auto=format&fit=crop&w=600&q=80" alt="Holstein Cow">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-top">
-                            <h3>Holstein Friesian</h3>
-                            <span class="breed-tag">Dairy</span>
-                        </div>
-                        <p class="location"><i class="ph-fill ph-map-pin"></i> Rangpur, Bangladesh</p>
-                        
-                        <div class="stats-row">
-                            <div class="stat">
-                                <span class="label">Weight</span>
-                                <span class="value">450kg</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Age</span>
-                                <span class="value">3 Yrs</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Gender</span>
-                                <span class="value">Female</span>
-                            </div>
-                        </div>
+                <?php if (count($allCows) > 0): ?>
+                    <?php foreach ($allCows as $cow): ?>
+                        <article class="cow-card">
+                            <div class="card-image">
+                                <span class="tag-price">$<?php echo number_format($cow['price']); ?></span>
+                                <img src="../upload/<?php echo htmlspecialchars($cow['photo_url']); ?>"
+                                    alt="<?php echo htmlspecialchars($cow['name']); ?>"
+                                    style="object-fit: cover; background-color: #e5e7eb;"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
 
-                        <div class="card-footer">
-                            <button class="btn btn-outline btn-sm">Message</button>
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-                </article>
+                                <div class="fallback-placeholder" style="display:none; width:100%; height:100%; background:#f3f4f6; align-items:center; justify-content:center; color:#9ca3af; font-weight:bold;">
+                                    No Image
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-top">
+                                    <h3><?php echo htmlspecialchars($cow['name']); ?></h3>
+                                    <span class="breed-tag"><?php echo htmlspecialchars($cow['breed']); ?></span>
+                                </div>
 
-                <article class="cow-card">
-                    <div class="card-image">
-                        <span class="tag-price">$2,800</span>
-                        <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=600&q=80" alt="Brahman Bull">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-top">
-                            <h3>Premium Brahman Bull</h3>
-                            <span class="breed-tag meat">Meat</span>
-                        </div>
-                        <p class="location"><i class="ph-fill ph-map-pin"></i> Dhaka, Bangladesh</p>
-                        
-                        <div class="stats-row">
-                            <div class="stat">
-                                <span class="label">Weight</span>
-                                <span class="value">850kg</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Age</span>
-                                <span class="value">4 Yrs</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Gender</span>
-                                <span class="value">Male</span>
-                            </div>
-                        </div>
+                                <div class="stats-row">
+                                    <div class="stat">
+                                        <span class="label">Weight</span>
+                                        <span class="value"><?php echo htmlspecialchars($cow['weight']); ?>kg</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="label">Age</span>
+                                        <span class="value"><?php echo htmlspecialchars($cow['age']); ?> Yrs</span>
+                                    </div>
+                                </div>
 
-                        <div class="card-footer">
-                            <button class="btn btn-outline btn-sm">Message</button>
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="cow-card">
-                    <div class="card-image">
-                        <span class="badge-verified"><i class="ph-fill ph-seal-check"></i> Verified</span>
-                        <span class="tag-price">$980</span>
-                        <img src="https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=600&q=80" alt="Red Cow">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-top">
-                            <h3>Red Chittagong</h3>
-                            <span class="breed-tag">Dairy</span>
-                        </div>
-                        <p class="location"><i class="ph-fill ph-map-pin"></i> Chittagong, Bangladesh</p>
-                        
-                        <div class="stats-row">
-                            <div class="stat">
-                                <span class="label">Weight</span>
-                                <span class="value">320kg</span>
+                                <div class="card-footer">
+                                    <a class="btn btn-primary btn-sm" style="width:100%" href="cow_details.php?id=<?php echo $cow['id']; ?>">View Details</a>
+                                </div>
                             </div>
-                            <div class="stat">
-                                <span class="label">Age</span>
-                                <span class="value">2.5 Yrs</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Gender</span>
-                                <span class="value">Female</span>
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <button class="btn btn-outline btn-sm">Message</button>
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="cow-card">
-                    <div class="card-image">
-                        <span class="tag-price">$1,100</span>
-                        <img src="https://images.unsplash.com/photo-1546445317-29f4545e9d53?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Sahiwal Cow">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-top">
-                            <h3>Pure Sahiwal</h3>
-                            <span class="breed-tag">Dairy</span>
-                        </div>
-                        <p class="location"><i class="ph-fill ph-map-pin"></i> Rajshahi, Bangladesh</p>
-                        
-                        <div class="stats-row">
-                            <div class="stat">
-                                <span class="label">Weight</span>
-                                <span class="value">410kg</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Age</span>
-                                <span class="value">3.2 Yrs</span>
-                            </div>
-                            <div class="stat">
-                                <span class="label">Gender</span>
-                                <span class="value">Female</span>
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <button class="btn btn-outline btn-sm">Message</button>
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-                </article>
-
+                        </article>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p style="text-align:center;">No cows found.</p>
+                <?php endif; ?>
             </div>
-
-            <div class="pagination">
-                <button class="btn btn-outline disabled"><i class="ph ph-caret-left"></i> Previous</button>
-                <span class="page-info">Page 1 of 5</span>
-                <button class="btn btn-outline">Next <i class="ph ph-caret-right"></i></button>
-            </div>
-
         </div>
     </main>
+    <?php include "./footer.php"; ?>
 
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-col brand-col">
-                <a href="#" class="footer-logo">
-                    <i class="ph-fill ph-cow"></i> CowKino<span class="highlight">.com</span>
-                </a>
-                <p>Connecting farms, creating value. The trusted platform for buying and selling livestock securely.</p>
-            </div>
-            <div class="footer-col links-col">
-                <h4>Quick Links</h4>
-                <div class="footer-nav">
-                    <a href="#">Home</a>
-                    <a href="#about">About Us</a>
-                    <a href="#market">Marketplace</a>
-                    <a href="#contact">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
-            </div>
-            <div class="footer-col social-col">
-                <h4>Follow Us</h4>
-                <div class="socials">
-                    <a href="#" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="ph ph-twitter-logo"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 CowKino. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="/Asset/Js/script.js"></script>
+    <script src="../Asset/Js/script.js"></script>
 </body>
+
 </html>
