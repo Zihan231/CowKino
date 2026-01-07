@@ -13,8 +13,24 @@
   </head>
   <body>
     <?php
-    include "./header.php";
+    // Ensure header.php exists in the same directory
+    include "./header.php"; 
+    // Commented out to prevent errors if you haven't created it yet
     ?>
+
+    <!-- <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="ph-fill ph-cow"></i> CowKino<span class="highlight">.com</span>
+            </a>
+            <nav class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="login.php" class="nav-link active">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header> -->
 
     <main class="login-section">
       <div class="login-container">
@@ -38,7 +54,8 @@
               <p>Enter your details to access your account.</p>
             </div>
 
-            <form id="loginForm">
+            <form id="loginForm" method="POST" action="../controller/login_check.php">
+              
               <div class="input-group">
                 <label for="email">Email Address</label>
                 <div class="input-field">
@@ -46,6 +63,7 @@
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="farmer@example.com"
                     required
                   />
@@ -59,6 +77,7 @@
                   <input
                     type="password"
                     id="password"
+                    name="password"
                     placeholder="••••••••"
                     required
                   />
@@ -71,12 +90,12 @@
 
               <div class="form-actions">
                 <label class="remember-me">
-                  <input type="checkbox" /> <span>Remember me</span>
+                  <input type="checkbox" name="remember" /> <span>Remember me</span>
                 </label>
                 <a href="#" class="forgot-pass">Forgot Password?</a>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-full btn-lg">
+              <button type="submit" name="submit" class="btn btn-primary btn-full btn-lg">
                 Sign In
               </button>
 
@@ -91,7 +110,7 @@
               </div>
 
               <p class="signup-link">
-                Don't have an account? <a href="#">Register here</a>
+                Don't have an account? <a href="register.html">Register here</a>
               </p>
             </form>
           </div>
@@ -99,55 +118,9 @@
       </div>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-content">
-        <div class="footer-col brand-col">
-          <a href="#" class="footer-logo">
-            <i class="ph-fill ph-cow"></i> CowKino<span class="highlight"
-              >.com</span
-            >
-          </a>
-          <p>
-            Connecting farms, creating value. The trusted platform for buying
-            and selling livestock securely.
-          </p>
-        </div>
-        <div class="footer-col links-col">
-          <h4>Quick Links</h4>
-          <div class="footer-nav">
-            <a href="#">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#market">Marketplace</a>
-            <a href="#contact">Contact</a>
-            <a href="#">Privacy Policy</a>
-          </div>
-        </div>
-        <div class="footer-col social-col">
-          <h4>Follow Us</h4>
-          <div class="socials">
-            <a href="#" aria-label="Facebook"
-              ><i class="ph ph-facebook-logo"></i
-            ></a>
-            <a href="#" aria-label="Twitter"
-              ><i class="ph ph-twitter-logo"></i
-            ></a>
-            <a href="#" aria-label="Instagram"
-              ><i class="ph ph-instagram-logo"></i
-            ></a>
-            <a href="#" aria-label="YouTube"
-              ><i class="ph ph-youtube-logo"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 CowKino. All rights reserved.</p>
-      </div>
-    </footer>
-
-    <script src="/Asset/Js/script.js"></script>
+    <script src="../Asset/Js/script.js"></script>
     <script>
-      // Inline script for password toggle specific to this page
+      // Password toggle script
       const toggleBtn = document.getElementById("togglePassword");
       const passInput = document.getElementById("password");
       if (toggleBtn) {

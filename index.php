@@ -22,11 +22,11 @@
 
         <nav class="nav-menu" id="navMenu">
           <ul class="nav-links">
-            <li><a href="#" class="nav-link active">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-            <li class="mobile-only"><a href="./view/login.php" class="nav-link">Login</a></li>
-          </ul>
+                    <li><a href="../index.php" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li class="mobile-only"><a href="./login.php" class="nav-link">Login</a></li>
+                </ul>
         </nav>
 
         <div class="nav-actions">
@@ -35,8 +35,8 @@
             <a href="./view/buy.php" class="btn btn-primary">Buy Cow</a>
           </div>
           <div class="auth-buttons">
-            <button class="btn-text">Login</button>
-            <button class="btn btn-dark">Register</button>
+            <a href="./view/login.php" class="btn btn-text">Login</a>
+            <a href="./view/register.php" class="btn btn-dark">Register</a>
           </div>
           <button class="hamburger" id="hamburger">
             <i class="ph ph-list"></i>
