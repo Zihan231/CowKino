@@ -348,29 +348,118 @@ footer { background: white; padding: 3rem 0; border-top: 1px solid #eee; margin-
     transform: translateY(-3px);
 }
 
-/* Footer Bottom Bar */
-.footer-bottom {
-    border-top: 1px solid #374151;
-    padding-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
+/* --- Simplified 3-Column Footer --- */
+.footer {
+    background-color: #111827; /* Dark background */
+    color: #9CA3AF; /* Soft gray text */
+    padding: 4rem 0 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: grid;
+    /* 3 Columns: Brand (wider), Links, Socials */
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+/* Column 1: Brand */
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    display: inline-flex;
     align-items: center;
-    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+}
+.footer-logo i { color: var(--primary); }
+
+.brand-col p {
+    line-height: 1.6;
+    max-width: 350px; /* Limits text width for better readability */
+}
+
+/* Headings for Col 2 & 3 */
+.footer-col h4 {
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+}
+
+/* Column 2: Vertical Links */
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-nav a {
+    color: #9CA3AF;
+    text-decoration: none;
+    transition: 0.2s;
+    width: fit-content;
+}
+
+.footer-nav a:hover {
+    color: var(--primary);
+    transform: translateX(5px); /* Subtle slide effect */
+}
+
+/* Column 3: Social Icons */
+.socials {
+    display: flex;
     gap: 1rem;
 }
 
-.payment-methods {
+.socials a {
+    background: #1F2937; /* Slightly lighter than bg */
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    justify-content: center;
+    border-radius: 50%; /* Circles */
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
 }
 
-/* Responsive Design for Footer */
-@media (max-width: 900px) {
-    .footer-top {
-        grid-template-columns: 1fr 1fr; /* 2 columns on tablet */
-        gap: 2rem;
+.socials a:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+}
+
+/* Footer Bottom Copyright */
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #374151; /* Thin gray line */
+    font-size: 0.9rem;
+    color: #6B7280;
+}
+
+/* Responsive: Stack on Mobile */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr; /* Stack into 1 column */
+        text-align: center;
+        gap: 2.5rem;
+    }
+
+    .brand-col p {
+        margin: 0 auto; /* Center text */
+    }
+
+    .footer-nav {
+        align-items: center; /* Center links */
+    }
+
+    .socials {
+        justify-content: center; /* Center icons */
     }
 }
 
@@ -422,4 +511,255 @@ footer { background: white; padding: 3rem 0; border-top: 1px solid #eee; margin-
     .hero-btns { justify-content: center; }
     .section-header { flex-direction: column; align-items: center; gap: 1rem; }
     .contact { margin: 0; border-radius: 0; }
+}
+
+/* =========================================
+   LOGIN PAGE STYLES
+   ========================================= */
+
+/* Main Wrapper to push content below fixed header */
+.login-section {
+    padding-top: 80px; /* Account for fixed navbar height */
+    min-height: calc(100vh - 400px); /* Ensures footer pushes down */
+    background-color: #F3F4F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 4rem;
+    padding-top: calc(80px + 2rem);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 1000px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    display: flex;
+    margin: 0 1.5rem;
+    min-height: 600px;
+}
+
+/* --- Left Side: Image --- */
+.login-image {
+    flex: 1;
+    position: relative;
+    background-color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: white;
+}
+
+.login-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.login-image .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(16, 185, 129, 0.6), rgba(31, 41, 55, 0.9));
+    z-index: 1;
+}
+
+.login-image .content-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.login-image h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.login-image p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* --- Right Side: Form --- */
+.login-form-wrapper {
+    flex: 1;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-content {
+    width: 100%;
+    max-width: 380px;
+}
+
+.form-header {
+    margin-bottom: 2rem;
+}
+
+.form-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827; /* Darkest Gray */
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    color: #6B7280;
+    font-size: 1rem;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.input-field {
+    position: relative;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 0.85rem 1rem 0.85rem 2.8rem;
+    border: 1.5px solid #E5E7EB;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #111827;
+    font-weight: 500;
+    transition: 0.2s;
+    outline: none;
+}
+
+.input-field input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    font-size: 1.2rem;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    cursor: pointer;
+}
+.toggle-pass:hover { color: var(--secondary); }
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4B5563;
+    cursor: pointer;
+}
+
+.forgot-pass {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.btn-lg {
+    padding: 0.85rem;
+    font-size: 1.05rem;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+}
+
+/* Divider & Social */
+.divider {
+    text-align: center;
+    border-bottom: 1px solid #E5E7EB;
+    line-height: 0.1em;
+    margin: 1.5rem 0 2rem;
+}
+.divider span {
+    background: #fff;
+    padding: 0 10px;
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+.social-btns {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem;
+    border: 1px solid #E5E7EB;
+    background: white;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.social-btn:hover { background-color: #F9FAFB; border-color: #D1D5DB; }
+
+.signup-link {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #4B5563;
+}
+.signup-link a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .login-container {
+        flex-direction: column;
+        max-width: 500px;
+    }
+    .login-image {
+        display: none; /* Hide image on mobile/tablet */
+    }
+    .login-form-wrapper {
+        padding: 2rem;
+    }
 }
