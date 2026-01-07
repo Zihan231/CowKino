@@ -6,40 +6,13 @@
     <title>Register | CowKino.com</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="/Asset/style/style.css" />
+    <link rel="stylesheet" href="../Asset/style/style.css" />
 </head>
 <body>
 
-    <header class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <i class="ph-fill ph-cow"></i>CowKino<span class="highlight">.com</span>
-            </a>
-
-            <nav class="nav-menu" id="navMenu">
-                <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                    <li class="mobile-only"><a href="login.html" class="nav-link">Login</a></li>
-                </ul>
-            </nav>
-
-            <div class="nav-actions">
-                <div class="trade-buttons">
-                    <a href="#" class="btn btn-outline">Sell Cow</a>
-                    <a href="#" class="btn btn-primary">Buy Cow</a>
-                </div>
-                <div class="auth-buttons">
-                    <a href="login.html" class="btn btn-text">Login</a>
-                    <a href="register.html" class="btn btn-dark">Register</a>
-                </div>
-                <button class="hamburger" id="hamburger">
-                    <i class="ph ph-list"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+    <?php
+    include "./header.php";
+    ?>
 
     <main class="login-section">
         <div class="login-container">
@@ -62,13 +35,16 @@
                         <p>Join us today! It takes less than a minute.</p>
                     </div>
 
-                    <form id="registerForm">
+                    <form id="registerForm"
+                    method="POST"
+                    action="../controller/createUserController.php"
+                    >
                         
                         <div class="input-group">
                             <label for="fullname">Full Name</label>
                             <div class="input-field">
                                 <i class="ph ph-user input-icon"></i>
-                                <input type="text" id="fullname" placeholder="e.g. Rahim Uddin" required>
+                                <input type="text" id="fullname" name="fullname" placeholder="e.g. Rahim Uddin" required>
                             </div>
                         </div>
 
@@ -76,7 +52,7 @@
                             <label for="email">Email Address</label>
                             <div class="input-field">
                                 <i class="ph ph-envelope input-icon"></i>
-                                <input type="email" id="email" placeholder="farmer@example.com" required>
+                                <input type="email" id="email" name="email" placeholder="farmer@example.com" required>
                             </div>
                         </div>
 
@@ -84,7 +60,7 @@
                             <label for="phone">Phone Number</label>
                             <div class="input-field">
                                 <i class="ph ph-phone input-icon"></i>
-                                <input type="tel" id="phone" placeholder="+880 1XXX XXXXXX" required>
+                                <input type="tel" id="phone" name="phone" placeholder="+880 1XXX XXXXXX" required>
                             </div>
                         </div>
 
@@ -92,7 +68,7 @@
                             <label for="password">Password</label>
                             <div class="input-field">
                                 <i class="ph ph-lock-key input-icon"></i>
-                                <input type="password" id="password" class="pass-input" placeholder="Create a password" required>
+                                <input type="password" id="password" name="password" class="pass-input" required>
                                 <i class="ph ph-eye-slash toggle-pass" onclick="toggleOnePass(this, 'password')"></i>
                             </div>
                         </div>
@@ -101,7 +77,7 @@
                             <label for="confirm-password">Confirm Password</label>
                             <div class="input-field">
                                 <i class="ph ph-check-circle input-icon"></i>
-                                <input type="password" id="confirm-password" class="pass-input" placeholder="Confirm password" required>
+                                <input type="password" id="confirm-password" name="confirm_password" class="pass-input" required>
                                 <i class="ph ph-eye-slash toggle-pass" onclick="toggleOnePass(this, 'confirm-password')"></i>
                             </div>
                         </div>
@@ -113,7 +89,7 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-full btn-lg">Create Account</button>
+                        <button type="submit" name="submit" class="btn btn-primary btn-full btn-lg">Create Account</button>
 
                         <p class="signup-link">Already have an account? <a href="login.html">Log In</a></p>
                     </form>

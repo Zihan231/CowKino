@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="/Asset//style/style.css" />
+    <link rel="stylesheet" href="./Asset/style/style.css" />
   </head>
   <body>
     <header class="navbar" id="navbar">
@@ -25,14 +25,14 @@
             <li><a href="#" class="nav-link active">Home</a></li>
             <li><a href="#about" class="nav-link">About</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
-            <li class="mobile-only"><a href="#" class="nav-link">Login</a></li>
+            <li class="mobile-only"><a href="./view/login.php" class="nav-link">Login</a></li>
           </ul>
         </nav>
 
         <div class="nav-actions">
           <div class="trade-buttons">
-            <a href="#" class="btn btn-outline">Sell Cow</a>
-            <a href="#" class="btn btn-primary">Buy Cow</a>
+            <a href="./view/sell.php" class="btn btn-outline">Sell Cow</a>
+            <a href="./view/buy.php" class="btn btn-primary">Buy Cow</a>
           </div>
           <div class="auth-buttons">
             <button class="btn-text">Login</button>

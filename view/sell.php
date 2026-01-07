@@ -6,39 +6,12 @@
     <title>Sell Your Cow | CowKino.com</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="/Asset/style/style.css" />
+    <link rel="stylesheet" href="../Asset//style/style.css" />
 </head>
 <body>
-
-    <header class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <i class="ph-fill ph-cow"></i>CowKino<span class="highlight">.com</span>
-            </a>
-            <nav class="nav-menu" id="navMenu">
-                <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                    <li class="mobile-only"><a href="login.html" class="nav-link">Login</a></li>
-                </ul>
-            </nav>
-            <div class="nav-actions">
-                <div class="trade-buttons">
-                    <a href="sell.html" class="btn btn-primary">Sell Cow</a>
-                    <a href="buy.html" class="btn btn-outline">Buy Cow</a>
-                </div>
-                <div class="auth-buttons">
-                    <a href="login.html" class="btn btn-text">Login</a>
-                    <a href="register.html" class="btn btn-dark">Register</a>
-                </div>
-                <button class="hamburger" id="hamburger">
-                    <i class="ph ph-list"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
+    <?php
+    include "./header.php";
+    ?>
     <main class="login-section">
         <div class="login-container">
             

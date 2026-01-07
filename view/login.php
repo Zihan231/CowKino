@@ -9,41 +9,12 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="/Asset/style/style.css" />
+    <link rel="stylesheet" href="../Asset/style/style.css" />
   </head>
   <body>
-    <header class="navbar" id="navbar">
-      <div class="container nav-container">
-        <a href="index.html" class="logo">
-          <i class="ph-fill ph-cow"></i>CowKino<span class="highlight"
-            >.com</span
-          >
-        </a>
-        <nav class="nav-menu" id="navMenu">
-          <ul class="nav-links">
-            <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-            <li class="mobile-only">
-              <a href="#" class="nav-link active">Login</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="nav-actions">
-          <div class="trade-buttons">
-            <a href="#" class="btn btn-outline">Sell Cow</a>
-            <a href="#" class="btn btn-primary">Buy Cow</a>
-          </div>
-          <div class="auth-buttons">
-            <button class="btn-text">Login</button>
-            <button class="btn btn-dark">Register</button>
-          </div>
-          <button class="hamburger" id="hamburger">
-            <i class="ph ph-list"></i>
-          </button>
-        </div>
-      </div>
-    </header>
+    <?php
+    include "./header.php";
+    ?>
 
     <main class="login-section">
       <div class="login-container">
