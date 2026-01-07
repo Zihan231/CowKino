@@ -39,9 +39,9 @@ if (session_status() == PHP_SESSION_NONE) {
                 if (isset($_SESSION['status']) && $_SESSION['status'] === true): 
                 ?>
                     <span style="font-weight: 600; color: var(--secondary); margin-right: 10px;">
-                        Hi, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!
+                        Hi, <?php echo htmlspecialchars($_SESSION['user_name']); ?> !
                     </span>
-                    <a href="./controller/logout.php" class="btn btn-outline" style="border-color: #ef4444; color: #ef4444;">
+                    <a href="../controller/logout.php" class="btn btn-outline" style="border-color: #ef4444; color: #ef4444;">
                         Logout
                     </a>
 
