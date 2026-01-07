@@ -17,7 +17,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     <title>Sell Your Cow | CowKino.com</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="../Asset//style/style.css" />
+    <link rel="stylesheet" href="../Asset/style/style.css" />
 </head>
 
 <body>
@@ -51,6 +51,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
                         <p>Fill in the details below to post your ad.</p>
                     </div>
 
+                    <?php if (isset($_SESSION['error_msg'])): ?>
+                        <div style="background-color: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-size: 0.9rem; border: 1px solid #fca5a5;">
+                            <?php 
+                                echo $_SESSION['error_msg']; 
+                                unset($_SESSION['error_msg']); 
+                            ?>
+                        </div>
+                    <?php endif; ?>
                     <form id="sellForm" action="../controller/sell_check.php" method="POST" enctype="multipart/form-data">
 
                         <div class="input-group">

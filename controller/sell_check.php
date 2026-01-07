@@ -26,16 +26,18 @@ if (isset($_POST['submit'])) {
     
     // 4. Validate Inputs
     if (empty($cowName) || empty($breed) || empty($price) || empty($weight) || empty($age)) {
-        echo "Error: All fields are required.";
+        $_SESSION['error_msg'] = "All fields (Name, Breed, Price, Weight, Age) are required.";
+        header('location: ../view/sell.php');
         exit();
     }
 
     if (!is_numeric($price) || !is_numeric($weight) || !is_numeric($age)) {
-        echo "Error: Price, Weight, and Age must be valid numbers.";
+        $_SESSION['error_msg'] = "Price, Weight, and Age must be valid numbers.";
+        header('location: ../view/sell.php');
         exit();
     }
 
-    // 5. Handle Image Upload to 'upload' folder
+    // 5. Handle Image Upload
     $photo_url = "";
 
     if (isset($_FILES['cowImage']) && $_FILES['cowImage']['error'] === 0) {
@@ -51,9 +53,6 @@ if (isset($_POST['submit'])) {
                 
                 // Generate unique name
                 $newFileName = uniqid('COW_', true) . "." . $fileExt;
-                
-                // --- KEY CHANGE HERE ---
-                // We define the target folder as '../upload/' (Root directory)
                 $uploadDir = '../upload/';
                 $uploadDest = $uploadDir . $newFileName;
 
@@ -64,23 +63,26 @@ if (isset($_POST['submit'])) {
 
                 // Move file
                 if (move_uploaded_file($fileTmpName, $uploadDest)) {
-                    // Success: Save just the filename to DB
                     $photo_url = $newFileName;
                 } else {
-                    echo "Error: Failed to move uploaded file.";
+                    $_SESSION['error_msg'] = "Failed to save the uploaded image.";
+                    header('location: ../view/sell.php');
                     exit();
                 }
 
             } else {
-                echo "Error: File size too large (Max 5MB).";
+                $_SESSION['error_msg'] = "File size too large. Max allowed is 5MB.";
+                header('location: ../view/sell.php');
                 exit();
             }
         } else {
-            echo "Error: Invalid file type.";
+            $_SESSION['error_msg'] = "Invalid file type. Allowed: JPG, JPEG, PNG, WEBP.";
+            header('location: ../view/sell.php');
             exit();
         }
     } else {
-        echo "Error: Please upload a photo.";
+        $_SESSION['error_msg'] = "Please upload a photo of the cow.";
+        header('location: ../view/sell.php');
         exit();
     }
 
@@ -88,14 +90,18 @@ if (isset($_POST['submit'])) {
     $status = InsertCow($cowName, $price, $breed, $age, $weight, $photo_url, $description);
 
     if ($status === true) {
-        // Redirect to Buy page to see the new listing
-        header('location: ../view/buy.php?msg=ad_posted'); 
+        // Success: Redirect to Buy page with a success flag
+        $_SESSION['success_msg'] = "Ad posted successfully!"; 
+        header('location: ../view/buy.php'); 
         exit();
     } else {
-        echo "Database Error: Could not post ad.";
+        $_SESSION['error_msg'] = "Database Error: Could not post ad. Please try again.";
+        header('location: ../view/sell.php');
+        exit();
     }
 
 } else {
     header('location: ../view/sell.php');
+    exit();
 }
 ?>
