@@ -1,29 +1,28 @@
 <?php
+session_start(); // Start session to store messages
 require_once '../model/DataBase.php';
 require_once '../model/users.php';
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 if (isset($_POST['submit'])) {
 
     // 1. Sanitize Inputs
     $fullname = trim($_POST['fullname']);
-    $email = trim($_POST['email']);
+    // PARSE EMAIL TO LOWERCASE HERE
+    $email = strtolower(trim($_POST['email'])); 
     $phone = trim($_POST['phone']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
     // 2. Validation Logic
     if (empty($fullname) || empty($email) || empty($phone) || empty($password)) {
-        echo "All fields are required!";
+        $_SESSION['error_msg'] = "All fields are required!";
+        header('location: ../view/register.php');
         exit;
     }
 
     if ($password !== $confirm_password) {
-        echo "Passwords do not match!";
-        // In a real project, redirect back with an error:
-        // header('location: ../register.html?error=password_mismatch');
+        $_SESSION['error_msg'] = "Passwords do not match!";
+        header('location: ../view/register.php');
         exit;
     }
 
@@ -31,16 +30,23 @@ if (isset($_POST['submit'])) {
     $status = InsertUser($fullname, $password, $email, $phone);
 
     if ($status === true) {
-        // Success
+        // Success: Optional success message for login page
+        $_SESSION['success_msg'] = "Account created successfully! Please login.";
         header('location: ../view/login.php');
+        exit;
     } elseif ($status === "email_exists") {
         // Error: Email taken
-        echo "Error: This email is already registered!";
+        $_SESSION['error_msg'] = "This email is already registered!";
+        header('location: ../view/register.php');
+        exit;
     } else {
         // Error: Database failed
-        echo "Error: Could not create account.";
+        $_SESSION['error_msg'] = "System error. Could not create account.";
+        header('location: ../view/register.php');
+        exit;
     }
 } else {
     // If someone tries to access this file directly without submitting form
     header('location: ../view/register.php');
+    exit;
 }

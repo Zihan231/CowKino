@@ -1,3 +1,10 @@
+<?php
+// Start Session at the very top to read error messages
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +42,14 @@
                         <p>Join us today! It takes less than a minute.</p>
                     </div>
 
+                    <?php if (isset($_SESSION['error_msg'])): ?>
+                        <div style="background-color: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-size: 0.9rem; border: 1px solid #fca5a5;">
+                            <?php 
+                                echo $_SESSION['error_msg']; 
+                                unset($_SESSION['error_msg']); // Clear message after showing
+                            ?>
+                        </div>
+                    <?php endif; ?>
                     <form id="registerForm"
                     method="POST"
                     action="../controller/createUserController.php"
@@ -91,7 +106,7 @@
 
                         <button type="submit" name="submit" class="btn btn-primary btn-full btn-lg">Create Account</button>
 
-                        <p class="signup-link">Already have an account? <a href="login.html">Log In</a></p>
+                        <p class="signup-link">Already have an account? <a href="login.php">Log In</a></p>
                     </form>
                 </div>
             </div>
@@ -100,7 +115,7 @@
 
     <?php include "./footer.php"; ?>
 
-    <script src="/Asset/Js/script.js"></script>
+    <script src="../Asset/Js/script.js"></script>
     <script>
         // Simple function to toggle password visibility for specific inputs
         function toggleOnePass(icon, inputId) {
