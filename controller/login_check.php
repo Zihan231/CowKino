@@ -13,13 +13,22 @@ if (isset($_POST['submit'])) {
         return $data;
     }
 
-    // 3. Apply Sanitization
-    $email = sanitize($_POST['email']);
+    // 3. Apply Sanitization & Normalization
+    // PARSE EMAIL TO LOWERCASE HERE
+    $email = strtolower(sanitize($_POST['email']));
     $password = sanitize($_POST['password']);
+
+    // Extra validation for empty fields
+    if (empty($email) || empty($password)) {
+        $_SESSION['error_msg'] = "Please enter both email and password.";
+        header('location: ../view/login.php');
+        exit();
+    }
 
     // Extra validation for email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format";
+        $_SESSION['error_msg'] = "Invalid email format.";
+        header('location: ../view/login.php');
         exit();
     }
 
@@ -37,12 +46,14 @@ if (isset($_POST['submit'])) {
         exit();
     } else {
         // Login Failed
-        echo "Invalid email or password";
-        // Optional: header('location: ../login.php?error=invalid_credentials');
+        $_SESSION['error_msg'] = "Invalid email or password.";
+        header('location: ../view/login.php');
+        exit();
     }
 
 } else {
     // If user tries to access this page directly
     header('location: ../view/login.php');
+    exit();
 }
 ?>
